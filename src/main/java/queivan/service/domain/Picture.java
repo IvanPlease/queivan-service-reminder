@@ -1,7 +1,10 @@
 package queivan.service.domain;
 
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.net.URL;
@@ -15,7 +18,7 @@ import java.util.UUID;
 public class Picture {
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private UUID id;
     @NotNull
     private URL image;

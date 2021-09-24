@@ -12,33 +12,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "_boilers")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Boiler {
-    @Id
-    @NotNull
-    @GeneratedValue
-    private UUID id;
-    @NotNull
+public class BoilerCreateDto {
     private String type;
-    @NotNull
     private String serialNumber;
-    @NotNull
-    private Boolean locallyMounted;
-    @NotNull
+    @Builder.Default
+    private Boolean locallyMounted = false;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Europe/Warsaw")
     private LocalDateTime installationDate;
-    @NotNull
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Europe/Warsaw")
     private LocalDateTime inspectionDate;
-    @NotNull
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Note> notes;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Picture> pictures;
-    @ManyToOne
-    private Client client;
 }

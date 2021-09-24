@@ -1,10 +1,12 @@
 package queivan.service.domain;
 
-import javax.persistence.*;
-
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity(name = "_notes")
@@ -15,7 +17,7 @@ import java.util.UUID;
 public class Note {
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private UUID id;
     @NotNull
     private String content;

@@ -1,12 +1,14 @@
 package queivan.service.domain;
 
-import java.util.List;
-import java.util.UUID;
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-import com.sun.istack.NotNull;
-import lombok.*;
+import java.util.List;
+import java.util.UUID;
 
 @Entity(name = "_clients")
 @Data
@@ -16,7 +18,7 @@ import lombok.*;
 public class Client {
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private UUID id;
     @NotNull
     private String firstName;
