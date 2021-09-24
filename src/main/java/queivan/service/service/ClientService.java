@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import queivan.service.domain.Client;
+import queivan.service.domain.ClientCreateDto;
 import queivan.service.domain.ClientFetchedDto;
 import queivan.service.exceptions.BoilerExistsException;
 import queivan.service.exceptions.ClientExistsException;
@@ -35,7 +36,7 @@ public class ClientService {
         return ClientFetchedDto.builder().build();
     }
 
-    public ClientFetchedDto create(ClientFetchedDto dto){
+    public ClientFetchedDto create(ClientCreateDto dto){
         Client mapped = mapper.mapToClient(dto);
         Client fetched = repository.save(mapped);
         return mapper.mapToClientFetchedDto(fetched);

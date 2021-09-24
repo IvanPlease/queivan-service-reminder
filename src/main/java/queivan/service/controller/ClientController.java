@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import queivan.service.domain.BoilerCreateDto;
 import queivan.service.domain.BoilerFetchedDto;
+import queivan.service.domain.ClientCreateDto;
 import queivan.service.domain.ClientFetchedDto;
 import queivan.service.facade.ClientFacade;
 
@@ -31,7 +32,7 @@ public class ClientController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ClientFetchedDto create(@RequestBody ClientFetchedDto clientDto){
+    public ClientFetchedDto create(@RequestBody ClientCreateDto clientDto){
         return facade.create(clientDto);
     }
 
