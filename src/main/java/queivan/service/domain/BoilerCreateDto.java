@@ -23,6 +23,4 @@ public class BoilerCreateDto {
     private Boolean locallyMounted = false;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Europe/Warsaw")
     private LocalDateTime installationDate;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Europe/Warsaw")
-    private LocalDateTime inspectionDate;
 }
