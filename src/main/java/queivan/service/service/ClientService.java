@@ -11,6 +11,7 @@ import queivan.service.exceptions.ClientNotFoundException;
 import queivan.service.mapper.ClientMapper;
 import queivan.service.service.repository.ClientRepository;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -19,6 +20,10 @@ import java.util.UUID;
 public class ClientService {
     private final ClientRepository repository;
     private final ClientMapper mapper;
+
+    public List<ClientFetchedDto> getAll() {
+        return mapper.mapToClientFetchedDtoList(repository.findAll());
+    }
 
     public ClientFetchedDto getByUserId(UUID userId) {
         try {
