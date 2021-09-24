@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ServiceApplication {
 
-    @GetMapping("/check")
-    public String deployCheck(){
-        return "I hate this shit";
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(ServiceApplication.class, args);
     }
