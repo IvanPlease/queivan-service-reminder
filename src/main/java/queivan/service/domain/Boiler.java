@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -30,9 +31,9 @@ public class Boiler {
     private Boolean locallyMounted;
     @NotNull
     @JsonFormat(pattern="yyyy-MM-dd", timezone="Europe/Warsaw")
-    private LocalDateTime installationDate;
+    private LocalDate installationDate;
     @JsonFormat(pattern="yyyy-MM-dd", timezone="Europe/Warsaw")
-    private LocalDateTime inspectionDate;
+    private LocalDate inspectionDate;
     @NotNull
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes;
