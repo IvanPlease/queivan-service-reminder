@@ -21,6 +21,6 @@ public class BoilerCreateDto {
     private String serialNumber;
     @Builder.Default
     private Boolean locallyMounted = false;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Europe/Warsaw")
+    @JsonFormat(pattern="yyyy-MM-dd", timezone="Europe/Warsaw")
     private LocalDateTime installationDate;
 }
