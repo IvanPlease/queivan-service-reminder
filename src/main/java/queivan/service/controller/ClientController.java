@@ -3,10 +3,7 @@ package queivan.service.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import queivan.service.domain.BoilerCreateDto;
-import queivan.service.domain.BoilerFetchedDto;
-import queivan.service.domain.ClientCreateDto;
-import queivan.service.domain.ClientFetchedDto;
+import queivan.service.domain.*;
 import queivan.service.facade.ClientFacade;
 import queivan.service.service.ServiceLogger;
 
@@ -22,7 +19,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class ClientController {
 
     private final ClientFacade facade;
-    private final ServiceLogger log;
 
     @GetMapping("/check")
     public String deployCheck(){
@@ -32,6 +28,11 @@ public class ClientController {
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public List<ClientFetchedDto> getAll(){
         return facade.getAll();
+    }
+
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
+    public ClientFetchedDto getById(@PathVariable UUID id){
+        return facade.getById(id);
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)

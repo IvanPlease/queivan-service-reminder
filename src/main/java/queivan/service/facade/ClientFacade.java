@@ -7,6 +7,7 @@ import queivan.service.domain.ClientFetchedDto;
 import queivan.service.service.ClientService;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -19,5 +20,9 @@ public class ClientFacade {
 
     public List<ClientFetchedDto> getAll() {
         return service.getAll();
+    }
+
+    public ClientFetchedDto getById(UUID id) {
+        return service.getById(id);
     }
 }

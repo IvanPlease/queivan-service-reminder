@@ -39,7 +39,7 @@ public class BoilerService {
     public BoilerFetchedDto create(BoilerCreateDto boilerDto, UUID userId) {
         try{
             isBoilerExisting(boilerDto.getSerialNumber());
-            ClientFetchedDto client = clientService.getByUserId(userId);
+            ClientFetchedDto client = clientService.getById(userId);
             boilerDto.setClient(client);
             Boiler entity = mapper.mapToBoiler(boilerDto);
             Boiler returned = repository.saveAndFlush(entity);

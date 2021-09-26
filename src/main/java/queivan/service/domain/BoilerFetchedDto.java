@@ -25,8 +25,6 @@ public class BoilerFetchedDto {
     private LocalDate installationDate;
     @JsonFormat(pattern="yyyy-MM-dd", timezone="Europe/Warsaw")
     private LocalDate inspectionDate;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NoteBoilerDto> notes;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PictureClientDto> pictures;
 }

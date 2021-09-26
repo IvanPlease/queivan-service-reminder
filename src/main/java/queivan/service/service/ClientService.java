@@ -25,7 +25,7 @@ public class ClientService {
         return mapper.mapToClientFetchedDtoList(repository.findAll());
     }
 
-    public ClientFetchedDto getByUserId(UUID userId) {
+    public ClientFetchedDto getById(UUID userId) {
         try {
             Client fetched = repository.findById(userId).orElseThrow(ClientDontExistsException::new);
             return mapper.mapToClientFetchedDto(fetched);
