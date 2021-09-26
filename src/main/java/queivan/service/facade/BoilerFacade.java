@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import queivan.service.domain.BoilerClosestDto;
 import queivan.service.domain.BoilerCreateDto;
+import queivan.service.domain.BoilerEditDto;
 import queivan.service.domain.BoilerFetchedDto;
 import queivan.service.service.BoilerService;
 
@@ -25,5 +26,9 @@ public class BoilerFacade {
 
     public List<BoilerClosestDto> getClosest() {
         return service.getClosest();
+    }
+
+    public BoilerEditDto getById(UUID id) {
+        return service.getById(id);
     }
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import queivan.service.domain.BoilerClosestDto;
 import queivan.service.domain.BoilerCreateDto;
+import queivan.service.domain.BoilerEditDto;
 import queivan.service.domain.BoilerFetchedDto;
 import queivan.service.facade.BoilerFacade;
 
@@ -34,6 +35,11 @@ public class BoilerController {
     @GetMapping(value = "/inspection", produces = APPLICATION_JSON_VALUE)
     public List<BoilerClosestDto> getClosest(){
         return facade.getClosest();
+    }
+
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
+    public BoilerEditDto getById(@PathVariable UUID id){
+        return facade.getById(id);
     }
 
     @PostMapping(value = "/{userId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)

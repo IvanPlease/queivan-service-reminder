@@ -16,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BoilerClientDto {
+public class BoilerEditDto {
     private UUID id;
     private String type;
     private String serialNumber;
@@ -25,8 +25,7 @@ public class BoilerClientDto {
     private LocalDate installationDate;
     @JsonFormat(pattern="yyyy-MM-dd", timezone="Europe/Warsaw")
     private LocalDate inspectionDate;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NoteBoilerDto> notes;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PictureClientDto> pictures;
+    private ClientId client;
 }

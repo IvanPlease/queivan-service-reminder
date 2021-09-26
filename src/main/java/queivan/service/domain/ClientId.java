@@ -1,5 +1,6 @@
 package queivan.service.domain;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,11 +14,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ClientFetchedDto {
+public class ClientId {
     private UUID id;
-    private String firstName;
-    private String lastName;
-    private String address;
-    private int phoneNumber;
-    private List<BoilerFetchedDto> boilers;
 }

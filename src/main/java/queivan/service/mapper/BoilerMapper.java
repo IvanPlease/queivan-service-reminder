@@ -10,8 +10,8 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface BoilerMapper {
     Boiler mapToBoiler(BoilerCreateDto boilerCreateDto);
-    BoilerClientDto mapToBoilerClientDto(Boiler boiler);
     List<BoilerFetchedDto> mapToBoilerFetchedDtoList(List<Boiler> all);
     BoilerFetchedDto mapToBoilerFetchedDto(Boiler returned);
     List<BoilerClosestDto> mapToBoilerClosestDtoList(List<Boiler> closest);
+    BoilerEditDto mapToBoilerEditDto(Boiler fetched);
 }

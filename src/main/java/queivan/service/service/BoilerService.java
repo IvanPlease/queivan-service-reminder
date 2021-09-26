@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import queivan.service.domain.*;
+import queivan.service.exceptions.BoilerDontExistsException;
 import queivan.service.exceptions.BoilerExistsException;
 import queivan.service.exceptions.ClientDontExistsException;
 import queivan.service.mapper.BoilerMapper;
@@ -23,6 +24,16 @@ public class BoilerService {
 
     public List<BoilerClosestDto> getAll() {
         return mapper.mapToBoilerClosestDtoList(repository.findAll());
+    }
+
+    public BoilerEditDto getById(UUID userId) {
+        try {
+            Boiler fetched = repository.findById(userId).orElseThrow(BoilerDontExistsException::new);
+            return mapper.mapToBoilerEditDto(fetched);
+        } catch (BoilerDontExistsException e) {
+            log.error(e.getMessage());
+        }
+        return BoilerEditDto.builder().build();
     }
 
     public BoilerFetchedDto create(BoilerCreateDto boilerDto, UUID userId) {
