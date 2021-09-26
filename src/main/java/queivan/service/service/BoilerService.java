@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import queivan.service.domain.*;
 import queivan.service.exceptions.BoilerExistsException;
+import queivan.service.exceptions.ClientDontExistsException;
 import queivan.service.mapper.BoilerMapper;
+import queivan.service.mapper.ClientMapper;
 import queivan.service.service.repository.BoilerRepository;
 
 import java.util.List;
@@ -13,33 +15,38 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
-@Slf4j
 public class BoilerService {
     private final BoilerRepository repository;
     private final BoilerMapper mapper;
     private final ClientService clientService;
+    private final ServiceLogger log;
 
-    public List<BoilerFetchedDto> getAll() {
-        return mapper.mapToBoilerFetchedDtoList(repository.findAll());
+    public List<BoilerClosestDto> getAll() {
+        return mapper.mapToBoilerClosestDtoList(repository.findAll());
     }
 
-    public BoilerCreateDto create(BoilerCreateDto boilerDto, UUID userId) {
-        isBoilerExisting(boilerDto.getSerialNumber());
-        ClientFetchedDto target = clientService.getByUserId(userId);
-        Boiler entity = mapper.mapToBoiler(boilerDto);
-        Boiler returned = repository.save(entity);
-        target.getBoilers().add(mapper.mapToBoilerClientDto(returned));
-        clientService.update(target);
-        return mapper.mapToBoilerCreateDto(returned);
+    public BoilerFetchedDto create(BoilerCreateDto boilerDto, UUID userId) {
+        try{
+            isBoilerExisting(boilerDto.getSerialNumber());
+            ClientFetchedDto client = clientService.getByUserId(userId);
+            boilerDto.setClient(client);
+            Boiler entity = mapper.mapToBoiler(boilerDto);
+            Boiler returned = repository.saveAndFlush(entity);
+            log.debug(String.format("Bojler o id: %s, został pomyślnie przypisany do użytkownika o id: %s", returned.getId(), userId));
+            return mapper.mapToBoilerFetchedDto(returned);
+        }catch(BoilerExistsException e){
+            log.error(e.getMessage());
+        }
+        return BoilerFetchedDto.builder().build();
     }
 
     private void isBoilerExisting(String serialNumber) {
-        try{
-            if(repository.existsBySerialNumber(serialNumber)){
-                throw new BoilerExistsException();
-            }
-        } catch (BoilerExistsException e) {
-            log.error(e.getMessage());
+        if(repository.existsBySerialNumber(serialNumber)){
+            throw new BoilerExistsException(serialNumber);
         }
+    }
+
+    public List<BoilerClosestDto> getClosest() {
+        return mapper.mapToBoilerClosestDtoList(repository.getClosest());
     }
 }

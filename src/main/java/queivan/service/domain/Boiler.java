@@ -35,9 +35,9 @@ public class Boiler {
     @JsonFormat(pattern="yyyy-MM-dd", timezone="Europe/Warsaw")
     private LocalDate inspectionDate;
     @NotNull
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "boiler", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "boiler", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Picture> pictures;
     @ManyToOne
     private Client client;

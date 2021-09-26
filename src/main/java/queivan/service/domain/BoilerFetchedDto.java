@@ -29,5 +29,4 @@ public class BoilerFetchedDto {
     private List<NoteBoilerDto> notes;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PictureClientDto> pictures;
-    private ClientBoilerDto client;
 }

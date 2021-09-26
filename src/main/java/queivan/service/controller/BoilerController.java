@@ -1,7 +1,9 @@
 package queivan.service.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import queivan.service.domain.BoilerClosestDto;
 import queivan.service.domain.BoilerCreateDto;
 import queivan.service.domain.BoilerFetchedDto;
 import queivan.service.facade.BoilerFacade;
@@ -25,12 +27,17 @@ public class BoilerController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public List<BoilerFetchedDto> getAll(){
+    public List<BoilerClosestDto> getAll(){
         return facade.getAll();
     }
 
+    @GetMapping(value = "/inspection", produces = APPLICATION_JSON_VALUE)
+    public List<BoilerClosestDto> getClosest(){
+        return facade.getClosest();
+    }
+
     @PostMapping(value = "/{userId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public BoilerCreateDto create(@RequestBody BoilerCreateDto boilerDto, @PathVariable UUID userId){
+    public BoilerFetchedDto create(@RequestBody BoilerCreateDto boilerDto, @PathVariable UUID userId){
         return facade.create(boilerDto, userId);
     }
 

@@ -28,6 +28,6 @@ public class Client {
     private String address;
     @NotNull
     private int phoneNumber;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Boiler> boilers;
 }
